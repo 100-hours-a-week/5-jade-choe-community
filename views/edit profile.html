@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit profile</title>
+    <meta name="description" content="회원정보를 수정할 수 있는 페이지">
+    <link rel="stylesheet" href="http://localhost:3000/static/edit profile.css">
+    <link rel="stylesheet" href="http://localhost:3000/static/header.css">
+</head>
+<body>
+    <section>
+        <header class="header">
+            <img class="profile_img_hidden">
+            <h1>아무 말 대잔치</h1>
+            <label for="checkbox"
+            src="http://localhost:3000/static/profile.svg"
+            class="profile_img">
+            </label>
+            <input type="checkbox"
+            class="dropdown_checkbox"
+            id="checkbox">
+            <div class="dropdown">
+                <ul>
+                    <a href="http://localhost:3000/views/edit profile.html">
+                        <li class="dropdown_text">
+                            회원정보수정
+                        </li>    
+                    </a>
+                    <a href="http://localhost:3000/views/edit password.html">
+                        <li class="dropdown_text">
+                            비밀번호수정
+                        </li>    
+                    </a>
+                    <a href="http://localhost:3000/views/Log in.html">
+                        <li class="dropdown_text">
+                            로그아웃
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </header>
+    </section>
+    <section class="profile">
+        <h2>회원정보수정</h2>
+        <form class="profile_form" method="post">
+            <label for="profile"
+            class="input_label"
+            >프로필 사진*</label>
+            <input type="image"
+            name="profile"
+            id="image"
+            >
+
+            <label for="email"
+            class="input_label"
+            >이메일</label>
+            <p class="show_only">startupcode@gmail.com</p>
+            
+            <label for="nickname"
+            class="input_label"
+            >닉네임</label>
+            <input type="text"
+            name="nickname"
+            pattern=""
+            placeholder="스타트업코드"
+            >
+            <label for="nickname" class="helper_text">* 닉네임을 입력해주세요</label>
+
+            <button type="submit" 
+            id="submit" 
+            href="" 
+            class="profile_button">수정하기</button>
+
+            <a href="" class="dismiss">회원 탈퇴</a>
+            
+            <div
+            class="profile_message"
+            >수정완료</div>
+        </form>
+    </section>
+</body>
+</html>
