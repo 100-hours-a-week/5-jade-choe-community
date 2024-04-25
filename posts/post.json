@@ -12,7 +12,7 @@
     },
     {
         "id" : 2,
-        "writer" : "",
+        "writer" : 1,
         "title" : "제목26자까지 가능",
         "time" : "2024-04-16 00:03:00",
         "image" : "http://image.com/test",
@@ -23,7 +23,7 @@
     },
     {
         "id" : 3,
-        "writer" : "",
+        "writer" : 1,
         "title" : "db공부",
         "time" : "2024-04-15 00:11:00",
         "image" : "http://image.com/test",
@@ -34,7 +34,7 @@
     },
     {
         "id" : 4,
-        "writer" : "",
+        "writer" : 2,
         "title" : "리눅스공부",
         "time" : "2024-04-16 00:11:00",
         "image" : "http://image.com/test",
@@ -45,7 +45,7 @@
     },
     {
         "id" : 5,
-        "writer" : "",
+        "writer" : 2,
         "title" : "코테공부",
         "time" : "2024-04-01 10:15:00",
         "image" : "http://image.com/test",
@@ -56,7 +56,7 @@
     },
     {
         "id" : 6,
-        "writer" : "",
+        "writer" : 2,
         "title" : "과제",
         "time" : "2024-03-25 14:03:10",
         "image" : "http://image.com/test",

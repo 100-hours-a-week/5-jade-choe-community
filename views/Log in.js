@@ -13,9 +13,9 @@ async function loadFile(filename){
 
 function validatePassword(password){
     const validate = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,20}$/;
-    if(!password.match(validate)){
+    if(password.match(validate)==null){
         const helper = document.getElementsByClassName("helper_text")[0];
-        helper.value = `* 비밀번호가 다릅니다.`;
+        helper.innerHTML = `* 비밀번호가 다릅니다.`;
         return false;
     } else {
         return true;
@@ -23,16 +23,16 @@ function validatePassword(password){
 }
 function validateEmail(email){
     const validate = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!email.match(validate)){
+    if(email.match(validate) == null){
         const helper = document.getElementsByClassName("helper_text")[0];
-        helper.value = `* 올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)`;
+        helper.innerHTML = `* 올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)`;
         return false;
     } else {
         return true;
     }
 }
 function findUser(email, password, userData){
-    const user = userData.find((elem)=>elem.email===email)
+    const user = userData.find(elem=>elem.email===email)
     if(!user){
         return true;
     } else if(user.password!=password){
