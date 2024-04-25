@@ -13,10 +13,8 @@
 }
 .content_list .write_button{
     position: relative;
-    left: 166%;
     width: 138px;
     height: 36px;
-    margin-top: 24px;
     background-color: #ACA0EB;
     border-radius: 16px;
     border: none;
@@ -24,6 +22,15 @@
     font-weight: 700;
     color: #fff;
     text-decoration: none;
+}
+.content_list .write_anchor{
+    position: relative;
+    left: 230px;
+    width: 138px;
+    height: 36px;
+    margin-top: 24px;
+    border-radius: 16px;
+    border: none;
 }
 .write_button:hover{
     background-color: #7F6AEE;

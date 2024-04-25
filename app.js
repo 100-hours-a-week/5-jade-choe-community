@@ -14,7 +14,19 @@ app.use('/static', express.static(path.join(__dirname, "public")))
 app.use('/views', express.static(path.join(__dirname, "views")))
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'views','Log in.html'))
+  res.sendFile(path.join(__dirname,'views','Log in.html'));
+})
+app.get('/views/post/:id', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'views', 'post', `${req.params.id}`));
+})
+app.get('/views/edit post/:id', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'views', 'edit post', `${req.params.id}`));
+})
+app.get('/views/edit profile/:id', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'views', 'edit profile', `${req.params.id}`));
+})
+app.get('/views/edit password/:id', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'views', 'edit password', `${req.params.id}`));
 })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
