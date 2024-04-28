@@ -16,10 +16,23 @@ app.use('/views', express.static(path.join(__dirname, "views")))
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname,'views','Log in.html'));
 })
-app.get('/views/post/:id', (req, res)=>{
-  res.sendFile(path.join(__dirname, 'views', 'post', `${req.params.id}`));
+// 이 아래 코드는 아직 사용 X
+app.get('/views/posts/:id', (req, res)=>{
+  const postId = req.params.id;
+  const jsonFilePath = path.join(__dirname, 'posts', 'post.json');
+  let postList;
+  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+    if (err) {
+      // 파일을 읽을 수 없는 경우 에러 응답
+      res.status(500).send('Error reading JSON file');
+      return;
+    }
+    postList = res.json(JSON.parse(data));
+    });
+  console.log(postList);
+  res.sendFile(path.join(__dirname, 'views', `post.html`));
 })
-app.get('/views/edit post/:id', (req, res)=>{
+app.get('/views/edit posts/:id', (req, res)=>{
   res.sendFile(path.join(__dirname, 'views', 'edit post', `${req.params.id}`));
 })
 app.get('/views/edit profile/:id', (req, res)=>{

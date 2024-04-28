@@ -9,6 +9,7 @@ async function loadFile(filename){
         return null;
     }
 }
+
 // 기본적으로 user의 data를 유지한다면 이 함수가 필요없을것.
 // 이건 생각나서 적어둔것 - 애초에 함수가 필요가 없을듯?
 // 일단 필요하다는것만 표시하고, 나중에 만들면 지우자
@@ -41,7 +42,7 @@ async function postGenerator(){
         button.style.backgroundColor = "#ACA0EB";
         helper.innerHTML = "* 제목, 내용을 모두 작성해주세요";
     }
-    
+
     // post submit
     let date = new Date();
     let time = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
@@ -59,5 +60,4 @@ async function postGenerator(){
         "comments" : 0
     }
     // submit 함수 추가 필요
-
 }
