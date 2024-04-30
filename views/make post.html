@@ -51,7 +51,7 @@
         <h1>
             게시글 작성
         </h1>
-        <form action="post" class="post_form">
+        <form class="post_form" onchange="helperChanger()">
             <label for="title" class="post_label">제목*</label>
             <hr>
             <input type="text"
@@ -82,9 +82,9 @@
             placeholder="파일 선택"
             alt="기존 파일 명">
 
-            <button type="" 
+            <button
             id="submit" 
-            href="http://localhost:3000/views/Log in.html" 
+            onclick="postGenerator()"
             class="submit_button">완료</button>
         </form>
     </section>

@@ -1,4 +1,3 @@
-// 모달창 + 버튼 색상변화, 댓글 수정, 댓글 삭제, 게시글 삭제 구현 필요
 async function loadFile(filename){
     const path = `http://localhost:3000/${filename}`;
     try{
@@ -11,20 +10,91 @@ async function loadFile(filename){
     }
 }
 
-// 이벤트 필요
+// 이벤트
 window.addEventListener("load", (event) => {
     getPost();
+    // 댓글창 값 추적하기
+    // mutationObserver 사용해서 값 변경 추적
+    // mutation으로 하니까 작동안함
 });
+// 아래 함수를 onchange()로 불러오는 방법으로 변경
+function commentColor(){
+    const target = document.getElementById("comment_textarea");
+    const button = document.getElementsByClassName("write_button")[0];
+    if(target.value.length>0){
+        button.style.backgroundColor="#7F6AEE";
+    } else{
+        button.style.backgroundColor="#ACA0EB";
+    }
+}
 
+function cancelComment(){
+    const modal = document.getElementById("comment_modal");
+    modal.style.display="none";
+    document.body.style.removeProperty("overflow");
+    
+}
+function cancelPost(){
+    const modal = document.getElementById("post_modal");
+    modal.style.display="none";
+    document.body.style.removeProperty("overflow");
+}
+function showComment(){
+    const modal = document.getElementById("comment_modal");
+    modal.style.display="block";
+    document.body.style.overflow = 'hidden';
+}
+function showPost(){
+    const modal = document.getElementById("post_modal");
+    modal.style.display="block";
+    document.body.style.overflow = 'hidden';
+}
+async function editComment(){
+    const commentId = 1;
+    const commentList = await loadFile("comments/comment.json");
+    const comment = commentList.findIndex(elem=>elem.commentId===commentId);
+    const button = document.getElementById("comment_write_button");
+    button.value = "댓글 수정";
+    const textarea = document.getElementById("comment_textarea");
+    button.setAttribute("onclick", "editComment()");
+    textarea.value = commentList[comment].text;
+    button.addeventListener('click', ()=>{
+        commentList[comment].text = textarea.value;
+    })
+    console.log(commentList);
+    // post commentList to comment.json
+}
+async function deleteComment(){
+    const commentId = 1;
+    const commentList = await loadFile("comments/comment.json");
+    const index = commentList.findIndex(elem=>elem.commentId===commentId);
+    if(index>-1) commentList.splice(index, 1);
+    console.log(commentList);
+    // post commentList to comment.json
+}
+function editPost(){
+    // 경로 수정 필요 - 라우팅
+    window.location.assign("http://localhost:3000/views/edit post.html");
+}
+async function deletePost(){
+    // 게시글 삭제
+    const postList = await loadFile("posts/post.json");
+    const postId = 1;
+    const index = postList.findIndex(elem=>elem.id===postId);
+    if(index>-1) postList.splice(index, 1);
+    console.log(postList);
+    // post to post.json
+    window.location.assign("http://localhost:3000/views/Main.html");
+}
 async function getPost(){
     const postId = 1;
-    const postList = await loadFile(`./posts/post.json`);
+    const postList = await loadFile(`posts/post.json`);
     const post = postList.find(elem=>elem.id===postId);
-    const commentList = await loadFile(`./comments/comment.json`);
+    const commentList = await loadFile(`comments/comment.json`);
     const comment = commentList.filter(elem=>elem.postId===postId);
-    const userList = await loadFile(`./users/user.json`);
+    const userList = await loadFile(`users/user.json`);
     const postArticle = document.getElementsByClassName("content")[0];
-    const commentArticle = docuemnt.getElementsByClassName("comment_list")[0];
+    const commentArticle = document.getElementsByClassName("comment_list")[0];
     // 글 본문 부분
     {
         let head, like, comment, view, writer, path;
@@ -46,11 +116,10 @@ async function getPost(){
         } else comment = post.comments;
         writer = userList.find((user)=>user.userId === post.writer)
         writer = writer.nickname;
-        path = `http://localhost:3000/views/post/${post.id}`;
         // 이 아래부분을 어떻게 해야할까? 링크부터 return이후 받아와서 화면에 표시하기까지
         // 해결
         let postContainer = Object.assign(
-            document.createElement(''), {href:`${path}`}
+            document.createElement('div'), {}
         );
         postContainer.innerHTML = `
                 <div class="content_header">
@@ -66,11 +135,11 @@ async function getPost(){
                             </h5>
                         </div>
                         <div class="content_edit">
-                            <button class="edit" id="edit">
-                                <a href="">수정</a>
+                            <button class="edit" id="edit" onclick="editPost()">
+                                수정
                             </button>
-                            <button class="edit" id="delete">
-                                <a href="">삭제</a>
+                            <button class="edit" id="delete" onclick="showPost()">
+                                삭제
                             </button>
                         </div>
                     </div>
@@ -104,13 +173,11 @@ async function getPost(){
     // 글 댓글 부분
     {
         comment.map((com)=>{
-            const commenter = userList.find(elem=>elem.userId===com.userId);
-            
+            const commenter = userList.find(elem=>elem.userId===com.writer);
             let commentContainer = Object.assign(
-                document.createElement(''), {href:`${path}`}
+                document.createElement('div'), {class: "comment"}
             );
             commentContainer.innerHTML = `
-                <div class="comment">
                     <div class="content_info">
                         <div class="content_writer">
                             <img src="http://localhost:3000/static/profile.svg" alt="">
@@ -120,20 +187,18 @@ async function getPost(){
                             </h5>
                         </div>
                         <div class="content_edit">
-                            <button class="edit" id="edit">
-                                <a href="">수정</a>
+                            <button class="edit" id="edit" onclick="editComment()">
+                                수정
                             </button>
-                            <button class="edit" id="delete">
-                                <a href="">삭제</a>
+                            <button class="edit" id="delete" onclick="showComment()">
+                                삭제
                             </button>
                         </div>
                     </div>
                     <p>
                         ${com.text}
                     </p>
-                </div>
             `
-
             commentArticle.appendChild(commentContainer);
         });
     }
@@ -142,12 +207,13 @@ async function getPost(){
 // 댓글 작성부분
 async function postComment(){
     const postId = 1;
-    const commentList = loadFile("./comments/comment.json");
+    const commentList = await loadFile("comments/comment.json");
+    console.log(commentList);
     let commentId = commentList.findLastIndex(elem=>elem.commentId>1);
     // post submit
     const date = new Date();
     const time = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-    // 현재 로그인중인 user, 조회중인 post 받아와야함 (지금은 이걸로 일단 대체)
+    // 현재 로그인중인 user, 조회중인 post 받아와야함 필요 (지금은 이걸로 일단 대체)
     const user = {
         "userId": 1,
         "email": "test@startupcode.kr",
@@ -155,7 +221,7 @@ async function postComment(){
         "nickname": "startup",
         "profile_image": "https://image.kr/img.jpg"
     }
-    const text = getElementById("comment_textarea");
+    const text = document.getElementById("comment_textarea");
     const newComment = {
         "postId" : postId,
         "commentId": commentId+2,
@@ -163,4 +229,8 @@ async function postComment(){
         "time" : time,
         "text" : text.value
     }
+    commentList.push(newComment);
+    console.log(commentList);
+    // post to comment.json
+    text.value = "";
 }

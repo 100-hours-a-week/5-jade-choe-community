@@ -47,9 +47,29 @@
             </div>
         </header>
     </section>
+    <!--모달 팝업-->
+    <div class="modal" id="post_modal">
+        <div class="modal_popup">
+            <h2><strong>게시글을 삭제하시겠습니까?</strong></h2>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="button_container">
+                <button type="button" class="cancel_btn" onclick="cancelPost()">취소</button>
+                <button type="button" class="proc_btn" onclick="deletePost()">확인</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="comment_modal">
+        <div class="modal_popup">
+            <h2><strong>댓글을 삭제하시겠습니까?</strong></h2>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="button_container">
+                <button type="button" class="cancel_btn" onclick="cancelComment()">취소</button>
+                <button type="button" class="proc_btn" onclick="deleteComment()">확인</button>
+            </div>
+        </div>
+    </div>
     <section class="post">
-        <article class="content">
-        </article>
+        <article class="content"></article>
         <article class="comment_input">
             <textarea 
             name="comment_textarea" 
@@ -57,12 +77,14 @@
             cols="30" 
             rows="10"
             placeholder="댓글을 남겨주세요!"
+            onchange="commentColor()"
             minlength="1"
             ></textarea>
             <hr>
             <button class="write_button"
-            type="submit"
-            onClick="postComment();"
+            type=""
+            id="comment_write_button"
+            onclick="postComment();"
             >
                 댓글 등록
             </button>

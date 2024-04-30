@@ -52,7 +52,7 @@
         <h1>
             게시글 수정
         </h1>
-        <form action="post" class="post_form">
+        <form class="post_form">
             <label for="title" class="post_label">제목*</label>
             <hr>
             <input type="text"
@@ -60,7 +60,7 @@
             id="title"
             class="post_input"
             placeholder="제목을 입력해주세요. (최대 26글자)"
-            pattern="{,27}"
+            maxlength="26"
             >
             <hr>
 
@@ -83,10 +83,10 @@
             placeholder="파일 선택"
             alt="기존 파일 명">
 
-            <button type="submit" 
+            <button type="" 
             id="submit" 
-            href="http://localhost:3000/views/post.html" 
-            class="submit_button">수정하기</button>
+            class="submit_button"
+            onclick="editPost()">수정하기</button>
         </form>
     </section>
 </body>

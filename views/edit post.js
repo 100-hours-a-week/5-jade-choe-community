@@ -17,7 +17,7 @@ window.addEventListener("load", (event) => {
 
 async function getPost(){
     const postId = 1;
-    const postList = loadFile(`./posts/post.json`);
+    const postList = await loadFile(`posts/post.json`);
     const post = postList.find(elem=>elem.id===postId);
     const title = document.getElementById("title");
     title.value = post.title;
@@ -30,13 +30,14 @@ async function getPost(){
 
 async function editPost(){
     const postId = 1;
-    let postList = loadFile(`./posts/post.json`);
+    let postList = await loadFile(`posts/post.json`);
     const postIndex = postList.findIndex(elem=>elem.id===postId);
     const title = document.getElementById("title");
     const detail = document.getElementById("detail");
     //const image = document.getElementById("file");
     postList[postIndex].title = title.value;
     postList[postIndex].content = detail.value;
+    console.log(postList);
     //postList[postIndex].image = file.value;
 
     // post to post.json 구현 필요
