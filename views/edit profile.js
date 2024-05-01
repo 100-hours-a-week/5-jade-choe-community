@@ -33,6 +33,7 @@ function findNickname(nickname, userData){
     }
 }
 async function helperChanger(){
+    const userList = await loadFile("users/user.json");
     const helper = document.getElementsByClassName("helper_text")[0];
     const nickname = document.getElementById("nickname");
     if(nickname.value.length===0){

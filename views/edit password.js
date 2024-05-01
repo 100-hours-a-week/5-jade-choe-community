@@ -49,7 +49,7 @@ function validatePassword(password, password2){
     else{
         helper.innerHTML = "";
         helper2.innerHTML = "";
-        button.style.backgroundcolor="#7F6AEE";
+        button.style.backgroundColor="#7F6AEE";
         return true;
     }
 }
@@ -68,7 +68,7 @@ async function updatePassword(){
         console.log(userList[index]);
         const toast = document.getElementsByClassName("profile_message")[0];
         toast.style.opacity = 1;
-        setTimeout(()=>{
+        await setTimeout(()=>{
             toast.style.opacity=0;
         }, 2000);
     }
