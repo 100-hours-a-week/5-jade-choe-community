@@ -34,7 +34,7 @@ function findNickname(nickname, userData){
 }
 async function helperChanger(){
     const helper = document.getElementsByClassName("helper_text")[0];
-    const nickname = documnet.getElementById("nickname");
+    const nickname = document.getElementById("nickname");
     if(nickname.value.length===0){
         helper.innerHTML = "* 닉네임을 입력해주세요."
     } else if(nickname.value.length>10){
@@ -52,9 +52,9 @@ async function helperChanger(){
         console.log(userList);
         // post to user.json
         const toast = document.getElementsByClassName("profile_message")[0];
-        toast.style.opacity = 0;
+        toast.style.opacity = 1;
         setTimeout(()=>{
-            toast.style.opacity=1;
+            toast.style.opacity=0;
         }, 2000);
     }
 }

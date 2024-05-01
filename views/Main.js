@@ -49,7 +49,8 @@ async function postGenerator(){
             } else comment = post.comments;
             writer = userList.find((user)=>user.userId === post.writer)
             writer = writer.nickname;
-            path = `http://localhost:3000/views/post/${post.id}`;
+            // path 수정 필요
+            path = `http://localhost:3000/views/post.html`;
             // 이 아래부분을 어떻게 해야할까? 링크부터 return이후 받아와서 화면에 표시하기까지
             // 해결
             let postContainer = Object.assign(

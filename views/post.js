@@ -54,14 +54,18 @@ async function editComment(){
     const commentList = await loadFile("comments/comment.json");
     const comment = commentList.findIndex(elem=>elem.commentId===commentId);
     const button = document.getElementById("comment_write_button");
-    button.value = "댓글 수정";
+    button.innerHTML = "댓글 수정";
     const textarea = document.getElementById("comment_textarea");
-    button.setAttribute("onclick", "editComment()");
+    button.setAttribute("onclick", "");
     textarea.value = commentList[comment].text;
-    button.addeventListener('click', ()=>{
+    button.addEventListener('click', (event)=>{
+        console.log(textarea.value);
         commentList[comment].text = textarea.value;
+        textarea.value = "";
+        button.innerHTML = "댓글 등록";
+        button.setAttribute("onclick", "postComment()");
+        console.log(commentList);
     })
-    console.log(commentList);
     // post commentList to comment.json
 }
 async function deleteComment(){

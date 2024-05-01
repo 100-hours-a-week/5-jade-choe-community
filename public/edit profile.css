@@ -100,7 +100,7 @@
     text-align: center;
     justify-content: center;
     font-size: 18px;
-    opacity: 1;
+    opacity: 0;
 }
 .modal{
     display: none;

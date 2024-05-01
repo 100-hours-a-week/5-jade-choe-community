@@ -152,9 +152,9 @@ async function Signin(){
         "nickname": nickname.value,
         "profile_image": image // image upload는 보류
     }
-    dataArr.push(userData);
+    await dataArr.push(userData);
     console.log(dataArr);
     // user.js에 저장 - 나중에 수정하자
     //await saveFile("../users/user.json", dataArr);
-    //window.location.assign("http://localhost:3000/views/Log in.html");
+    window.location.assign("http://localhost:3000/views/Log in.html");
 }
