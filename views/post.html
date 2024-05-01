@@ -7,6 +7,7 @@
     <meta name="description" content="게시글 상세조회 페이지">
     <link rel="stylesheet" href="http://localhost:3000/static/post.css">
     <link rel="stylesheet" href="http://localhost:3000/static/header.css">
+    <script type="text/javascript" src="http://localhost:3000/views/post.js"></script>
 </head>
 <body>
     <section>
@@ -46,56 +47,29 @@
             </div>
         </header>
     </section>
+    <!--모달 팝업-->
+    <div class="modal" id="post_modal">
+        <div class="modal_popup">
+            <h2><strong>게시글을 삭제하시겠습니까?</strong></h2>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="button_container">
+                <button type="button" class="cancel_btn" onclick="cancelPost()">취소</button>
+                <button type="button" class="proc_btn" onclick="deletePost()">확인</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="comment_modal">
+        <div class="modal_popup">
+            <h2><strong>댓글을 삭제하시겠습니까?</strong></h2>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="button_container">
+                <button type="button" class="cancel_btn" onclick="cancelComment()">취소</button>
+                <button type="button" class="proc_btn" onclick="deleteComment()">확인</button>
+            </div>
+        </div>
+    </div>
     <section class="post">
-        <article class="content">
-            <div class="content_header">
-                <h2><strong>
-                    일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육
-                </strong></h2>
-                <div class="content_info">
-                    <div class="content_writer">
-                        <img src="http://localhost:3000/static/profile.svg" alt="">
-                        <h6>더미 작성자1</h6>
-                        <h5>
-                            yyyy-mm-dd hh:mm:ss
-                        </h5>
-                    </div>
-                    <div class="content_edit">
-                        <button class="edit" id="edit">
-                            <a href="">수정</a>
-                        </button>
-                        <button class="edit" id="delete">
-                            <a href="">삭제</a>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-            
-            <div class="content_body">
-                <img class="content_image"
-                src="http://localhost:3000/static/pexels-photo-255379.jpeg"
-                >
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras luctus nibh neque, in volutpat leo accumsan a. Nullam elementum gravida aliquet. Aliquam erat volutpat. Donec rutrum tincidunt placerat. Quisque ligula lectus, scelerisque eget auctor ac, rutrum eu massa. Donec varius dolor id turpis semper rhoncus. Nunc in hendrerit lorem. Cras felis nulla, hendrerit ut nibh a, pellentesque placerat ligula. Quisque ut velit accumsan, malesuada purus et, efficitur leo. Integer ac ex neque. Sed pharetra arcu nibh, a mattis libero vulputate id. Proin nec varius libero. Curabitur vel orci ut arcu aliquet rhoncus. Nam non ultrices sapien. Curabitur viverra, est ut condimentum maximus, sem est luctus lorem, vel vehicula sapien elit sit amet nibh.
-                </p>
-            </div>
-
-            <div class="content_footer">
-                <button class="info" id="view">
-                    <strong>123</strong>
-                    <br>
-                    <strong class="small">조회수</strong>
-                </button>
-                <button class="info" id="comment_number">
-                    <strong>123</strong>
-                    <br>
-                    <strong class="small">댓글</strong>
-                </button>
-            </div>
-            <hr>
-        </article>
+        <article class="content"></article>
         <article class="comment_input">
             <textarea 
             name="comment_textarea" 
@@ -103,81 +77,19 @@
             cols="30" 
             rows="10"
             placeholder="댓글을 남겨주세요!"
+            onchange="commentColor()"
             minlength="1"
             ></textarea>
             <hr>
             <button class="write_button"
-            type="submit">
+            type=""
+            id="comment_write_button"
+            onclick="postComment();"
+            >
                 댓글 등록
             </button>
         </article>
         <article class="comment_list">
-            <div class="comment">
-                <div class="content_info">
-                    <div class="content_writer">
-                        <img src="http://localhost:3000/static/profile.svg" alt="">
-                        <h6>더미 작성자1</h6>
-                        <h5>
-                            yyyy-mm-dd hh:mm:ss
-                        </h5>
-                    </div>
-                    <div class="content_edit">
-                        <button class="edit" id="edit">
-                            <a href="">수정</a>
-                        </button>
-                        <button class="edit" id="delete">
-                            <a href="">삭제</a>
-                        </button>
-                    </div>
-                </div>
-                <p>
-                    댓글 내용
-                </p>
-            </div>
-            <div class="comment">
-                <div class="content_info">
-                    <div class="content_writer">
-                        <img src="http://localhost:3000/static/profile.svg" alt="">
-                        <h6>더미 작성자1</h6>
-                        <h5>
-                            yyyy-mm-dd hh:mm:ss
-                        </h5>
-                    </div>
-                    <div class="content_edit">
-                        <button class="edit" id="edit">
-                            <a href="">수정</a>
-                        </button>
-                        <button class="edit" id="delete">
-                            <a href="">삭제</a>
-                        </button>
-                    </div>
-                </div>
-                <p>
-                    댓글 내용
-                </p>
-            </div>
-            <div class="comment">
-                <div class="content_info">
-                    <div class="content_writer">
-                        <img src="http://localhost:3000/static/profile.svg" alt="">
-                        <h6>더미 작성자1</h6>
-                        <h5>
-                            yyyy-mm-dd hh:mm:ss
-                        </h5>
-                    </div>
-                    <div class="content_edit">
-                        <button class="edit" id="edit">
-                            <a href="">수정</a>
-                        </button>
-                        <button class="edit" id="delete">
-                            <a href="">삭제</a>
-                        </button>
-                    </div>
-                </div>
-                <p>
-                    댓글 내용
-                </p>
-            </div>
         </article>
     </section>
 </body>

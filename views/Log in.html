@@ -24,7 +24,7 @@
             class="email"
             name="email"
             pattern="[a-z0-9.,]+@[a-z0-9.,]+\.[a-z]{2,4}$"
-            oninput="validateEmail(this.value);"
+            oninput="validate();"
             placeholder="이메일을 입력하세요"
             required
             >
@@ -34,7 +34,7 @@
             class="password"
             name="password"
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$"
-            oninput="validatePassword(this.value);"
+            oninput="validate();"
             placeholder="비밀번호를 입력하세요"
             required
             >
