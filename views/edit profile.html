@@ -42,6 +42,17 @@
             </div>
         </header>
     </section>
+    <!--모달 팝업-->
+    <div class="modal" id="user_modal">
+        <div class="modal_popup">
+            <h2><strong>회원탈퇴 하시겠습니까?</strong></h2>
+            <p>작성된 게시글과 댓글은 삭제됩니다.</p>
+            <div class="button_container">
+                <button type="button" class="cancel_btn" onclick="cancelUser()">취소</button>
+                <button type="button" class="proc_btn" onclick="deleteUser()">확인</button>
+            </div>
+        </div>
+    </div>
     <section class="profile">
         <h2>회원정보수정</h2>
         <form class="profile_form" method="post">
@@ -56,24 +67,24 @@
             <label for="email"
             class="input_label"
             >이메일</label>
-            <p class="show_only">startupcode@gmail.com</p>
+            <p class="show_only"></p>
             
             <label for="nickname"
             class="input_label"
             >닉네임</label>
             <input type="text"
             name="nickname"
-            pattern=""
-            placeholder="스타트업코드"
+            id="nickname"
             >
             <label for="nickname" class="helper_text">* 닉네임을 입력해주세요</label>
 
             <button type="submit" 
             id="submit" 
             href="" 
-            class="profile_button">수정하기</button>
+            class="profile_button"
+            onclick="helperChanger()">수정하기</button>
 
-            <a href="" class="dismiss">회원 탈퇴</a>
+            <a class="dismiss" onclick="showModal()">회원 탈퇴</a>
             
             <div
             class="profile_message"
